@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roxy 硬件作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4f1ea; --ink:#1d1f22; --muted:#6b6a66; --line:#d6d0c4; --grid:rgba(29,31,34,.05);
+  --accent:#e2531f; --accent-soft:#fbe3d8; --card:#fbf9f5; --hint:#fff6d6; --hint-line:#d9b84a;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace; --sans:"Noto Sans SC",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#15171a; --ink:#ece8df; --muted:#9a968d; --line:#33363b; --grid:rgba(236,232,223,.04);
+  --accent:#ff7a45; --accent-soft:#3a2219; --card:#1c1f23; --hint:#2b2614; --hint-line:#8a7428;}}
+:root[data-theme="dark"]{
+  --paper:#15171a; --ink:#ece8df; --muted:#9a968d; --line:#33363b; --grid:rgba(236,232,223,.04);
+  --accent:#ff7a45; --accent-soft:#3a2219; --card:#1c1f23; --hint:#2b2614; --hint-line:#8a7428;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.7;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.mono{font-family:var(--mono)}
+header{padding:72px 0 40px;border-bottom:2px solid var(--ink)}
+.tag{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+h1{font-size:clamp(40px,8vw,84px);font-weight:900;line-height:1.05;margin:12px 0 8px;letter-spacing:-.02em}
+.tagline{font-size:clamp(16px,2.4vw,20px);color:var(--muted);max-width:640px}
+.hero{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end}
+.avatar{width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid var(--ink)}
+.titleblock{margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border:1.5px solid var(--ink)}
+.titleblock div{padding:10px 14px;border-right:1px solid var(--line);font-size:14px}
+.titleblock div:last-child{border-right:none}
+.titleblock b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);font-weight:400;text-transform:uppercase}
+.titleblock a{color:var(--ink)}
+section{padding:56px 0}
+h2{font-size:14px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:24px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.about{font-size:18px;max-width:760px}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:28px}
+.skill{border:1px solid var(--line);background:var(--card);padding:16px 18px}
+.skill h3{font-size:15px;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:12px;padding:3px 9px;border:1px solid var(--ink);border-radius:2px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.toc a{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);padding:4px 10px;background:var(--card)}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.proj{border-top:2px solid var(--ink);padding:40px 0 48px;scroll-margin-top:16px}
+.proj-head{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;margin-bottom:20px}
+.pcode{font-family:var(--mono);font-size:13px;background:var(--ink);color:var(--paper);padding:2px 8px}
+.proj h3{font-size:clamp(24px,4vw,34px);font-weight:900;line-height:1.2}
+.proj-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:32px}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px;margin-bottom:18px}
+.meta dt{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;padding-top:3px}
+.summary{font-size:16px;margin-bottom:16px}
+.hl{list-style:none;margin-bottom:18px}
+.hl li{padding-left:20px;position:relative;margin-bottom:6px;font-size:15px}
+.hl li::before{content:"";position:absolute;left:2px;top:.72em;width:8px;height:8px;background:var(--accent)}
+.cover{width:100%;aspect-ratio:4/3;object-fit:cover;border:1.5px solid var(--ink);display:block;background:var(--card);cursor:zoom-in}
+.placeholder{aspect-ratio:4/3;border:1.5px dashed var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:13px;text-align:center;padding:16px;
+  background:repeating-linear-gradient(45deg,transparent 0 10px,var(--grid) 10px 11px)}
+.placeholder code{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.thumbs img{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--line);cursor:zoom-in}
+.vids{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.vids video:first-child{grid-column:1/-1}
+video{width:100%;border:1.5px solid var(--ink);background:#000}
+.play{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:13px;font-weight:600;text-decoration:none;color:var(--paper);background:var(--accent);padding:8px 16px;border:1.5px solid var(--ink)}
+.play:hover{filter:brightness(1.1)}
+.hints{background:var(--hint);border:1px dashed var(--hint-line);padding:14px 16px;font-size:13px;margin-top:8px}
+.hints b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;display:block;margin-bottom:6px}
+.hints ul{padding-left:18px}
+.todo{background:var(--hint);outline:1px dashed var(--hint-line);padding:0 3px}
+footer{border-top:2px solid var(--ink);padding:24px 0 48px;font-size:12px;color:var(--muted);font-family:var(--mono)}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:9;cursor:zoom-out;padding:16px}
+#lb img{max-width:100%;max-height:100%}
+@media (max-width:760px){
+  header{padding-top:48px}.hero{grid-template-columns:1fr}.avatar{width:84px;height:84px;order:-1}
+  .proj-grid{grid-template-columns:1fr;gap:20px}.thumbs{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="hero">
+    <div><div class="tag" id="t-title"></div><h1 id="t-name"></h1><p class="tagline" id="t-tagline"></p></div>
+    <img class="avatar" id="avatar" alt="" hidden>
+  </div>
+  <div class="titleblock" id="titleblock"></div>
+</div></header>
+<main class="wrap">
+  <section><h2>About</h2><p class="about" id="about"></p><div class="skills" id="skills"></div></section>
+  <section style="padding-bottom:0"><h2>Projects</h2><nav class="toc" id="toc"></nav></section>
+  <div id="projects"></div>
+</main>
+<footer><div class="wrap" id="foot"></div></footer>
+<div id="lb"><img alt=""></div>
+<script src="content.js"></script>
+<script>
+const P = window.PORTFOLIO, $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = s => esc(s).replace(/【待填[^】]*】/g, m => `<span class="todo">${m}</span>`);
+const EXTS = ["jpg","jpeg","png","JPG","JPEG","PNG","webp"];
+function tryLoad(img, base, onFail, i = 0){
+  if (i >= EXTS.length) return onFail && onFail();
+  img.onerror = () => tryLoad(img, base, onFail, i + 1);
+  img.src = `${base}.${EXTS[i]}`;
+}
+document.title = `${P.name} · ${P.title}`;
+$("#t-title").textContent = P.title;
+$("#t-name").textContent = P.name;
+$("#t-tagline").innerHTML = fmt(P.tagline);
+$("#about").innerHTML = fmt(P.about);
+const av = $("#avatar"); av.onload = () => av.hidden = false; tryLoad(av, "media/me/avatar");
+
+const c = P.contact, tb = [["Email", c.email], ["GitHub", c.github], ["链接", c.other]].filter(r => r[1]);
+tb.push(["Projects", String(P.projects.length).padStart(2, "0")]);
+$("#titleblock").innerHTML = tb.map(([k, v]) => {
+  const val = /^https?:/.test(v) ? `<a href="${esc(v)}" target="_blank">${esc(v.replace(/^https?:\/\//, ""))}</a>` : fmt(v);
+  return `<div><b>${k}</b>${val}</div>`;
+}).join("");
+$("#skills").innerHTML = P.skills.map(g =>
+  `<div class="skill"><h3>${esc(g.group)}</h3><div class="chips">${g.items.map(i => `<span class="chip">${esc(i)}</span>`).join("")}</div></div>`).join("");
+$("#toc").innerHTML = P.projects.map((p, i) => `<a href="#${p.id}"><span class="mono">P${i + 1}</span> ${esc(p.name)}</a>`).join("");
+
+const root = $("#projects");
+P.projects.forEach((p, i) => {
+  const el = document.createElement("article");
+  el.className = "proj"; el.id = p.id;
+  const dir = `media/${p.id}`;
+  el.innerHTML = `
+    <div class="proj-head"><span class="pcode">P${i + 1}</span><h3>${esc(p.name)}</h3></div>
+    <div class="proj-grid">
+      <div class="media">
+        <img class="cover" alt="${esc(p.name)}" hidden>
+        <div class="placeholder"><span>还没有封面图</span><code>${dir}/cover.jpg</code></div>
+        <div class="thumbs"></div>
+        <div class="vids"></div>
+      </div>
+      <div>
+        <dl class="meta">
+          <dt>背景</dt><dd>${fmt(p.context)}</dd>
+          <dt>时间</dt><dd>${fmt(p.time)}</dd>
+          <dt>角色</dt><dd>${fmt(p.role)}</dd>
+        </dl>
+        <p class="summary">${fmt(p.summary)}</p>
+        <ul class="hl">${p.highlights.map(h => `<li>${fmt(h)}</li>`).join("")}</ul>
+        <div class="chips">${p.tech.map(t => `<span class="chip">${fmt(t)}</span>`).join("")}</div>
+        ${p.link ? `<a class="play" href="${esc(p.link)}" target="_blank">${esc(p.linkText || "打开")} →</a>` : ""}
+        ${P.showHints && p.hints?.length ? `<div class="hints"><b>填写提示（showHints 改成 false 就隐藏）</b><ul>${p.hints.map(h => `<li>${esc(h)}</li>`).join("")}</ul></div>` : ""}
+      </div>
+    </div>`;
+  root.appendChild(el);
+
+  const cover = el.querySelector(".cover"), ph = el.querySelector(".placeholder");
+  let hasCover = false, coverFailed = false, firstThumb = null;
+  const showCover = () => { cover.hidden = false; ph.remove(); hasCover = true; };
+  const promote = t => { cover.onerror = null; cover.onload = showCover; cover.src = t.src; t.remove(); };
+  cover.onload = showCover;
+  tryLoad(cover, `${dir}/cover`, () => {
+    coverFailed = true;
+    if (firstThumb) promote(firstThumb);
+    else if (!P.showHints) ph.remove();
+  });
+  const thumbs = el.querySelector(".thumbs");
+  for (let n = 1; n <= 8; n++) {
+    const t = new Image(); t.alt = "";
+    t.onload = () => {
+      if (t.isConnected || t.dataset.used) return;
+      t.dataset.used = 1;
+      if (coverFailed && !hasCover && !firstThumb) { firstThumb = t; promote(t); return; }
+      thumbs.appendChild(t);
+      if (!firstThumb) firstThumb = t;
+    };
+    tryLoad(t, `${dir}/${n}`);
+  }
+  const vids = el.querySelector(".vids");
+  ["demo","demo2","demo3","demo4","demo5","demo6"].forEach(n => {
+    const v = document.createElement("video");
+    v.controls = true; v.preload = "metadata"; v.playsInline = true; v.hidden = true;
+    const srcs = [`${n}.mp4`, `${n}.mov`]; let k = 0;
+    v.onerror = () => { if (++k < srcs.length) v.src = `${dir}/${srcs[k]}`; };
+    v.onloadedmetadata = () => v.hidden = false;
+    vids.appendChild(v); v.src = `${dir}/${srcs[0]}`;
+  });
+});
+
+const lb = $("#lb");
+document.addEventListener("click", e => {
+  if (e.target.matches(".cover, .thumbs img")) { lb.querySelector("img").src = e.target.src; lb.style.display = "flex"; }
+  else if (e.target.closest("#lb")) lb.style.display = "none";
+});
+$("#foot").textContent = `${P.name} · ${P.title} · ${new Date().getFullYear()}`;
+</script>
+</body>
+</html>
