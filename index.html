@@ -65,6 +65,8 @@ h2::after{content:"";flex:1;height:1px;background:var(--line)}
 .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
 .thumbs img{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--line);cursor:zoom-in}
 .vids{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.vids video:first-child{grid-column:1/-1}
+.vids.many{grid-template-columns:repeat(3,1fr)}.vids.many video:first-child{grid-column:auto}
+@media (max-width:760px){.vids.many{grid-template-columns:1fr 1fr}}
 video{width:100%;border:1.5px solid var(--ink);background:#000}
 .play{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:13px;font-weight:600;text-decoration:none;color:var(--paper);background:var(--accent);padding:8px 16px;border:1.5px solid var(--ink)}
 .play:hover{filter:brightness(1.1)}
@@ -181,7 +183,7 @@ P.projects.forEach((p, i) => {
     v.controls = true; v.preload = "metadata"; v.playsInline = true; v.hidden = true;
     const srcs = [`${n}.mp4`, `${n}.mov`]; let k = 0;
     v.onerror = () => { if (++k < srcs.length) v.src = `${dir}/${srcs[k]}`; };
-    v.onloadedmetadata = () => v.hidden = false;
+    v.onloadedmetadata = () => { v.hidden = false; vids.classList.toggle("many", vids.querySelectorAll("video:not([hidden])").length >= 3); };
     vids.appendChild(v); v.src = `${dir}/${srcs[0]}`;
   });
 });
